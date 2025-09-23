@@ -1,7 +1,6 @@
 package com.finalproject.MultilinguialAiApp.model.dto;
 
 import lombok.*;
-
 import java.util.Date;
 import java.util.UUID;
 

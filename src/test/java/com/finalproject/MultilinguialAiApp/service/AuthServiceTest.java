@@ -17,13 +17,14 @@ public class AuthServiceTest {
 
     private UserRepository userRepository;
     private JwtTokenProvider jwtTokenProvider;
+    private RegistrationService registrationService;
     private AuthService authService;
 
     @BeforeEach
     void setUp() {
         userRepository = mock(UserRepository.class);
         jwtTokenProvider = new JwtTokenProvider("SuperSecretJwtKeySuperSecretJwtKey", 3600000);
-        authService = new AuthService(userRepository, jwtTokenProvider);
+        registrationService = new RegistrationService(userRepository, jwtTokenProvider);
     }
 
     @Test
@@ -34,7 +35,7 @@ public class AuthServiceTest {
         when(userRepository.save(any(User.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        AuthResponse response = authService.register(req);
+        AuthResponse response = registrationService.register(req);
 
         assertNotNull(response.getToken());
         assertEquals("Bearer", response.getTokenType());
